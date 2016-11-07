@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title ng-controller="PageHeader as $ctrl">{{::$ctrl.todo.user}}'s TO DO List</title>
+	<link href="vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="vendor/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+	<link href="css/main.css" rel="stylesheet">
+	<link href="css/ng-cloak.css" rel="stylesheet">
+</head>
+
+<body ng-cloak>
+
+	<div class="container">
+		<page-header></page-header>
+		<todo-list-admin></todo-list-admin>
+	</div>
+
+	<script src="vendor/angular/angular.min.js"></script>
+	<script src="vendor/angular-sanitize/angular-sanitize.min.js"></script>
+	<script src="vendor/jquery/dist/jquery.min.js"></script>
+	<script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+
+	<script src="app.js"></script>
+
+	<script src="/common/common.module.js"></script>
+	<script src="/common/directives/common-directives.module.js"></script>
+	<script src="/common/directives/convert-to-date.directive.js"></script>
+
+	<script src="/feature/feature.module.js"></script>
+
+	<script src="/feature/page-header/page-header.module.js"></script>
+	<script src="/feature/page-header/page-header.controller.js"></script>
+	<script src="/feature/page-header/page-header.service.js"></script>
+	<script src="/feature/page-header/page-header.directive.js"></script>
+
+	<script src="/feature/todo/task-list/task-list.module.js"></script>
+	<script src="/feature/todo/task-list/task-list.directive.js"></script>
+	<script src="/feature/todo/task-list/checked-items.filter.js"></script>
+
+	<script src="/feature/todo/todo.module.js"></script>
+	<script src="/feature/todo/todo-list-admin.directive.js"></script>
+	<script src="/feature/todo/todo.controller.js"></script>
+	<script src="/feature/todo/todo.service.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+<div class="modal fade edit-item-dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$ctrl.cleanForm()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">{{$ctrl.editedItem ? 'Edit Item Dialog' : 'Add Item Dialog'}}</h4>
+      </div>
+      <div class="modal-body">
+        <div class="panel">
+          <form novalidate name="newTask" class="form-horizontal">
+            <div class="form-group">
+                <label for="action" class="control-label col-sm-4">Action:</label>
+                <div class="col-sm-6">
+                    <input id="action" name="action" class="form-control" ng-model="$ctrl.newItem.action" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="deadline" class="control-label col-sm-4">Deadline:</label>
+                <div class="col-sm-6">
+                    <input id="deadline" name="deadline" type="date" class="form-control" ng-model="$ctrl.newItem.deadline" convert-to-date/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="responsible" class="control-label col-sm-4">Responsible:</label>
+                <div class="col-sm-6">
+                    <input id="responsible" name="responsible" type="text" class="form-control" ng-model="$ctrl.newItem.responsible" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="estimate" class="control-label col-sm-4">Estimate:</label>
+                <div class="col-sm-6">
+                    <input id="estimate" name="estimate" min="0" max="100" type="number" class="form-control" ng-model="$ctrl.newItem.estimate" />
+                </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" ng-click="$ctrl.cleanForm()" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary"
+            ng-click="$ctrl.saveItem($ctrl.todo.items, $ctrl.newItem)" ng-disabled="!$ctrl.newItem.action" data-dismiss="modal">
+            Save
+          </button>
+      </div>
+    </div>
+  </div>
+</div>

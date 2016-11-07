@@ -1,0 +1,64 @@
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>
+              <button type="button" class="btn btn-link" ng-click="$ctrl.sortBy()">
+                Number
+                <span class="glyphicon glyphicon-sort"></span>
+              </button>
+            </th>
+            <th>
+              <button type="button" class="btn btn-link" ng-click="$ctrl.sortBy('action')">
+                Description
+                <span class="glyphicon glyphicon-sort"></span>
+              </button>
+            </th>
+            <th>
+              <button type="button" class="btn btn-link" ng-click="$ctrl.sortBy('done')">
+                Done
+                <span class="glyphicon glyphicon-sort"></span>
+              </button>
+            </th>
+            <th>
+              <button type="button" class="btn btn-link" ng-click="$ctrl.sortBy('deadline')">
+                Deadline
+                <span class="glyphicon glyphicon-sort"></span>
+              </button>
+            </th>
+            <th>
+              <button type="button" class="btn btn-link" ng-click="$ctrl.sortBy('responsible')">
+                Responsible
+                <span class="glyphicon glyphicon-sort"></span>
+              </button>
+            </th>
+            <th>
+              <button type="button" class="btn btn-link" ng-click="$ctrl.sortBy('estimate')">
+                Estimate
+                <span class="glyphicon glyphicon-sort"></span>
+              </button>
+            </th>
+            <th class="text-right">Commands</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="item in $ctrl.todo.items | checkedItems: $ctrl.showComplete | orderBy: $ctrl.property : $ctrl.reverse">
+            <td>{{$ctrl.todo.items.indexOf(item) + 1}}</td>
+            <td>{{item.action}}</td>
+            <td>
+                <label>{{item.done ? 'Yes' : 'No'}}</label>
+                <input type="checkbox" ng-model="item.done"/>
+            </td>
+            <td>{{item.deadline | date}}</td>
+            <td>{{item.responsible}}</td>
+            <td>{{item.estimate}}</td>
+            <td class="text-right">
+                <button type="button" class="btn btn-primary" ng-click="$ctrl.editItem(item)" data-toggle="modal" data-target=".edit-item-dialog">
+                    <span class="glyphicon glyphicon-edit" aria-hidden="true" title="Edit"></span>
+                </button>
+                <button type="button" class="btn btn-danger" ng-click="$ctrl.removeItem($ctrl.todo.items, item)">
+                    <span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete"></span>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
