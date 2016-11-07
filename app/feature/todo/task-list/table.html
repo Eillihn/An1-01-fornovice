@@ -50,7 +50,15 @@
             </td>
             <td>{{item.deadline | date}}</td>
             <td>{{item.responsible}}</td>
-            <td>{{item.estimate}}</td>
+            <td>
+              <button type="button" class="btn btn-default btn-xs" ng-click="item.estimate = item.estimate + 1" ng-disabled="item.estimate > 99">
+                <span class="glyphicon glyphicon-plus"></span>
+              </button>
+              {{item.estimate}}
+              <button type="button" class="btn btn-default btn-xs" ng-click="item.estimate = item.estimate - 1" ng-disabled="item.estimate < 1">
+                <span class="glyphicon glyphicon-minus"></span>
+              </button>
+            </td>
             <td class="text-right">
                 <button type="button" class="btn btn-primary" ng-click="$ctrl.editItem(item)" data-toggle="modal" data-target=".edit-item-dialog">
                     <span class="glyphicon glyphicon-edit" aria-hidden="true" title="Edit"></span>

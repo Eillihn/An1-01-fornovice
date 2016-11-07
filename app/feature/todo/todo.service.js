@@ -12,7 +12,8 @@
             cleanForm,
             showRemoveAllCompleted,
             removeAllCompleted,
-            sortBy
+            sortBy,
+            setDeadlineTomorrow
         };
 
         function saveItem(items, newItem) {
@@ -79,6 +80,12 @@
         function sortBy(sortName) {
             this.reverse = (this.property === sortName) ? !this.reverse : false;
             this.property = sortName;
+        }
+
+        function setDeadlineTomorrow(item) {
+            var newDate = new Date();
+            newDate = newDate.setDate(newDate.getDate() + 1);
+            item.deadline = newDate;
         }
     }
 
