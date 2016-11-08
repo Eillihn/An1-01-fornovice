@@ -1,0 +1,95 @@
+<div class="panel panel-primary" ng-controller="TodoTable as $ctrl">
+    <div class="panel-heading">
+        <span class="glyphicon glyphicon-tasks" aria-hidden="true"></span> To Do List
+    </div>
+    <div class="panel-body">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        <button type="button" class="btn btn-link" ng-click="$ctrl.sortBy()">
+                        Number
+                        <span class="glyphicon glyphicon-sort"></span>
+                        </button>
+                    </th>
+                    <th>
+                        <button type="button" class="btn btn-link" ng-click="$ctrl.sortBy('action')">
+                        Description
+                        <span class="glyphicon glyphicon-sort"></span>
+                        </button>
+                    </th>
+                    <th>
+                        <button type="button" class="btn btn-link" ng-click="$ctrl.sortBy('done')">
+                        Done
+                        <span class="glyphicon glyphicon-sort"></span>
+                        </button>
+                    </th>
+                    <th>
+                        <button type="button" class="btn btn-link" ng-click="$ctrl.sortBy('deadline')">
+                        Deadline
+                        <span class="glyphicon glyphicon-sort"></span>
+                        </button>
+                    </th>
+                    <th>
+                        <button type="button" class="btn btn-link" ng-click="$ctrl.sortBy('responsible')">
+                        Responsible
+                        <span class="glyphicon glyphicon-sort"></span>
+                        </button>
+                    </th>
+                    <th>
+                        <button type="button" class="btn btn-link" ng-click="$ctrl.sortBy('estimate')">
+                        Estimate
+                        <span class="glyphicon glyphicon-sort"></span>
+                        </button>
+                    </th>
+                    <th class="text-right">Commands</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in $ctrl.getTodoItems() | checkedItems: $ctrl.showComplete | orderBy: $ctrl.property : $ctrl.reverse">
+                    <td>{{$ctrl.indexOfTodoItem(item) + 1}}</td>
+                    <td>{{item.action}}</td>
+                    <td>
+                        <label>{{item.done ? 'Yes' : 'No'}}</label>
+                        <input type="checkbox" ng-model="item.done"/>
+                    </td>
+                    <td>{{item.deadline | date}}</td>
+                    <td>{{item.responsible}}</td>
+                    <td>
+                        <button type="button" class="btn btn-default btn-xs" ng-click="item.estimate = item.estimate - 1" ng-disabled="item.estimate < 1">
+                        <span class="glyphicon glyphicon-minus"></span>
+                        </button>
+                        {{item.estimate}}
+                        <button type="button" class="btn btn-default btn-xs" ng-click="item.estimate = item.estimate + 1" ng-disabled="item.estimate > 99">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                    </td>
+                    <td class="text-right">
+                        <button type="button" class="btn btn-primary" ng-click="$ctrl.editItem(item)" data-toggle="modal" data-target=".edit-item-dialog">
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true" title="Edit"></span>
+                        </button>
+                        <button type="button" class="btn btn-danger" ng-click="$ctrl.removeItem(item)">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete"></span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <label>
+        <input type="checkbox" ng-model="$ctrl.showComplete"/>
+        Show Complete
+        </label>
+    </div>
+    <div class="panel-footer">
+        <div class="row">
+            <div class="col-sm-2">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".edit-item-dialog">Add Item</button>
+            </div>
+            <div class="col-sm-offset-8 col-sm-2">
+                <button type="button" class="btn btn-danger pull-right" ng-show="$ctrl.showRemoveAllCompleted()" ng-click="$ctrl.removeAllCompleted()">
+                Remove all completed tasks
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
