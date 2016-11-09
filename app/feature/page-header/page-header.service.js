@@ -4,20 +4,18 @@
     angular.module('pageHeader')
         .factory('pageHeaderService', pageHeaderService);
 
-    function pageHeaderService($filter) {
+    function pageHeaderService(todoItemsService) {
         return {
             incompleteCount,
             warningLevel
         };
 
-        function incompleteCount(items) {
-            return angular.isArray(items) ? $filter('filter')(items, {
-                done: false
-            }).length : 0;
+        function incompleteCount() {
+            return todoItemsService.getIncompletedTodoItems().length;
         }
 
-        function warningLevel(items) {
-            return incompleteCount(items) < 3 ? 'label-success' : 'label-warning';
+        function warningLevel() {
+            return incompleteCount() < 3 ? 'label-success' : 'label-warning';
         }
     }
 

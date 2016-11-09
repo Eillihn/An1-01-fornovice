@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html ng-controller="PageHeader as $ctrl">
 
 <head>
 	<meta charset="utf-8">
-	<title ng-controller="PageHeader as $ctrl">{{::$ctrl.todo.user}}'s TO DO List</title>
+	<title>{{::$ctrl.todo.user}}'s TO DO List</title>
 	<link href="vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link href="vendor/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
 	<link href="css/main.css" rel="stylesheet">
@@ -14,7 +14,8 @@
 
 	<div class="container">
 		<page-header></page-header>
-		<todo-list-admin></todo-list-admin>
+		<todo-form></todo-form>
+		<todo-table></todo-table>
 	</div>
 
 	<script src="vendor/angular/angular.min.js"></script>
@@ -29,20 +30,23 @@
 	<script src="/common/directives/convert-to-date.directive.js"></script>
 
 	<script src="/feature/feature.module.js"></script>
+	<script src="/feature/todo-items.service.js"></script>
 
 	<script src="/feature/page-header/page-header.module.js"></script>
 	<script src="/feature/page-header/page-header.controller.js"></script>
 	<script src="/feature/page-header/page-header.service.js"></script>
 	<script src="/feature/page-header/page-header.directive.js"></script>
 
-	<script src="/feature/todo/task-list/task-list.module.js"></script>
-	<script src="/feature/todo/task-list/task-list.directive.js"></script>
-	<script src="/feature/todo/task-list/checked-items.filter.js"></script>
+	<script src="/feature/todo-table/todo-table.module.js"></script>
+	<script src="/feature/todo-table/checked-items.filter.js"></script>
+	<script src="/feature/todo-table/todo-table.directive.js"></script>
+	<script src="/feature/todo-table/todo-table.service.js"></script>
+	<script src="/feature/todo-table/todo-table.controller.js"></script>
 
-	<script src="/feature/todo/todo.module.js"></script>
-	<script src="/feature/todo/todo-list-admin.directive.js"></script>
-	<script src="/feature/todo/todo.controller.js"></script>
-	<script src="/feature/todo/todo.service.js"></script>
+	<script src="/feature/todo-form/todo-form.module.js"></script>
+	<script src="/feature/todo-form/todo-form.directive.js"></script>
+	<script src="/feature/todo-form/todo-form.service.js"></script>
+	<script src="/feature/todo-form/todo-form.controller.js"></script>
 </body>
 
 </html>

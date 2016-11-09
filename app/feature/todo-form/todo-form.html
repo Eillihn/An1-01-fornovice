@@ -1,4 +1,4 @@
-<div class="modal edit-item-dialog">
+<div class="modal edit-item-dialog" data-backdrop="static" ng-controller="TodoForm as $ctrl">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -22,7 +22,7 @@
                     <input id="deadline" name="deadline" type="date" class="form-control" ng-model="$ctrl.newItem.deadline" convert-to-date/>
                 </div>
                 <div class="col-sm-2">
-                  <button type="button" class="btn btn-default btn-sm pull-right" ng-click="$ctrl.setDeadlineTomorrow($ctrl.newItem)" ng-model="$ctrl.newItem.deadline">
+                  <button type="button" class="btn btn-default btn-sm pull-right" ng-click="$ctrl.newItem.deadline = $ctrl.getTomorrow()" ng-model="$ctrl.newItem.deadline">
                       Tomorrow
                   </button>
                 </div>
@@ -45,7 +45,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" ng-click="$ctrl.cleanForm()" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary"
-            ng-click="$ctrl.saveItem($ctrl.todo.items, $ctrl.newItem)" ng-disabled="!$ctrl.newItem.action" data-dismiss="modal">
+            ng-click="$ctrl.saveItem($ctrl.newItem)" ng-hide="!$ctrl.newItem.action" data-dismiss="modal">
             Save
           </button>
       </div>

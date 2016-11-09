@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    angular.module('taskList')
+    angular.module('todoTable')
         .filter('checkedItems', checkedItems);
 
     function checkedItems() {
