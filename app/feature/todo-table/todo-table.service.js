@@ -16,11 +16,7 @@
         };
 
         function removeItem(item) {
-            let items = todoItemsService.getTodoItems();
-            let index = items.indexOf(item);
-            if (item && index > -1) {
-                items.splice(index, 1);
-            }
+            todoItemsService.removeItem(item);
         }
 
         function editItem(item) {
@@ -36,10 +32,7 @@
             let completedItems = todoItemsService.getCompletedTodoItems();
 
             angular.forEach(completedItems, (item) => {
-                let index = items.indexOf(item);
-                if (index > -1) {
-                    items.splice(index, 1);
-                }
+                todoItemsService.removeItem(item);
             });
         }
 
@@ -53,7 +46,7 @@
         }
 
         function indexOfTodoItem(item) {
-            return getTodoItems().indexOf(item);
+            return todoItemsService.indexOfItem(item);
         }
     }
 

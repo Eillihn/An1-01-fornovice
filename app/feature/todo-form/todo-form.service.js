@@ -22,11 +22,11 @@
                     item.deadline = item.deadline.getTime();
                 }
 
-                let itemIndex = items.indexOf(this.editedItem);
+                let itemIndex = todoItemsService.indexOfItem(this.editedItem);
                 if (itemIndex > -1) {
-                    items.splice(itemIndex, 1, item);
+                    todoItemsService.replaceItem(itemIndex, item);
                 } else {
-                    items.push(item);
+                    todoItemsService.addItem(item);
                 }
             }
             this.cleanForm();

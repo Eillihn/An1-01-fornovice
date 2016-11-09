@@ -9,7 +9,11 @@
             getTodoItems,
             setTodoItems,
             getCompletedTodoItems,
-            getIncompletedTodoItems
+            getIncompletedTodoItems,
+            removeItem,
+            replaceItem,
+            addItem,
+            indexOfItem
         };
 
         function getTodoItems() {
@@ -31,5 +35,29 @@
                 done: false
             });
         }
+
+        function removeItem(item) {
+            let items = getTodoItems();
+            let index = items.indexOf(item);
+            if (item && index > -1) {
+                items.splice(index, 1);
+            }
+        }
+
+        function replaceItem(index, item) {
+            let items = getTodoItems();
+            items.splice(index, 1, item);
+        }
+
+        function addItem(item) {
+            let items = getTodoItems();
+            items.push(item);
+        }
+
+        function indexOfItem(item) {
+            let items = getTodoItems();
+            return items.indexOf(item);
+        }
+
     }
 })();
