@@ -1,7 +1,12 @@
 (function() {
     'use strict';
 
-    angular.module('feature', ['pageHeader', 'todoForm', 'todoTable'])
+    angular.module('feature', [
+            'pageHeader',
+            'todoForm',
+            'todoTable',
+            'tableConfig'
+        ])
         .run(runFeature)
         .value('model', {
             'user': 'Vitaliy',
