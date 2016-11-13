@@ -4,8 +4,7 @@
     angular.module('feature', [
             'pageHeader',
             'todoForm',
-            'todoTable',
-            'tableConfig'
+            'todoTable'
         ])
         .run(runFeature)
         .value('model', {

@@ -18,8 +18,9 @@
 		<todo-table></todo-table>
 	</div>
 
-	<div ng-controller="Rank as $ctrl"></div>
-	<div ng-controller="RandomGenerator as $ctrl"></div>
+	<!--<div ng-controller="Rank as $ctrl"></div>-->
+	<!--<div ng-controller="RandomGenerator as $ctrl"></div>-->
+	<div ng-controller="FiltersTest as $ctrl"></div>
 
 	<script src="vendor/angular/angular.min.js"></script>
 	<script src="vendor/angular-sanitize/angular-sanitize.min.js"></script>
@@ -39,6 +40,10 @@
 	<script src="/common/services/rank.services.js"></script>
 	<script src="/common/services/random-generator.service.js"></script>
 
+	<script src="/common/filters/common-filters.module.js"></script>
+	<script src="/common/filters/label-case.filter.js"></script>
+	<script src="/common/filters/byte-converter.filter.js"></script>
+
 	<script src="/feature/feature.module.js"></script>
 	<script src="/feature/todo-items.service.js"></script>
 
@@ -52,10 +57,7 @@
 	<script src="/feature/todo-table/todo-table.directive.js"></script>
 	<script src="/feature/todo-table/todo-table.service.js"></script>
 	<script src="/feature/todo-table/todo-table.controller.js"></script>
-
-	<script src="/feature/table-config/table-config.module.js"></script>
-	<script src="/feature/table-config/table-config.service.js"></script>
-	<script src="/feature/table-config/table-config.controller.js"></script>
+	<script src="/feature/todo-table/table-config.service.js"></script>
 
 	<script src="/feature/todo-form/todo-form.module.js"></script>
 	<script src="/feature/todo-form/todo-form.directive.js"></script>

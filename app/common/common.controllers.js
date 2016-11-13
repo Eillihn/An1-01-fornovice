@@ -3,7 +3,8 @@
 
     angular.module('common')
         .controller('RandomGenerator', RandomGenerator)
-        .controller('Rank', Rank);
+        .controller('Rank', Rank)
+        .controller('FiltersTest', FiltersTest);
 
     function RandomGenerator(randomGeneratorService, $log) {
         $log.info('Random Generator Service ------------------');
@@ -35,6 +36,16 @@
         $log.error('error');
         $log.debug('debug');
         $log.myLog('myLog');
+    }
+
+    function FiltersTest($filter) {
+        console.info('Label Case Filter ------------------');
+        console.log('myLabelCaseTest - ' + $filter('labelCase')('myLabelCaseTest'));
+        console.info('Byte Converter Filter ------------------');
+        console.log('2 000 000 000 to Gb - ' + $filter('byteConverter')(2000000000, 'Gb'));
+        console.log('10 093 515 to Mb - ' + $filter('byteConverter')(10093515, 'Mb'));
+        console.log('95 657 to kb - ' + $filter('byteConverter')(95657, 'kb'));
+        console.log('0 to Mb - ' + $filter('byteConverter')(0, 'Mb'));
     }
 
 })();

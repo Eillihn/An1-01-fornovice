@@ -4,10 +4,11 @@
     angular.module('todoTable')
         .controller('TodoTable', TodoTable);
 
-    function TodoTable(todoTableService) {
+    function TodoTable(todoTableService, tableConfigService) {
         let $ctrl = this;
-        $ctrl.reverse = false;
-        $ctrl.sortName = 'action';
+        $ctrl.columns = tableConfigService.getTableColumns();
+        $ctrl.currentPage = 0;
+        $ctrl.limit = 5;
         Object.assign($ctrl, todoTableService);
     }
 
