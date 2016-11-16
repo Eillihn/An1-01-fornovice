@@ -1,74 +1,81 @@
-<div ng-controller="TableConfig as $configCtrl">
+<div ng-controller="TodoTable as $ctrl">
 
-    <div class="panel">
-        <div class="panel-body">
+    <label>Search:
+        <input type="text" ng-model="$ctrl.search.action"
+               ng-change="$ctrl.search.responsible = $ctrl.search.action; $ctrl.currentPage = 0"/>
+    </label>
+    <br/>
+    <label>Number of tasks per page:
+        <select ng-model="$ctrl.limit" ng-change="$ctrl.currentPage = 0"
+                ng-options="n for n in [3, 5, 10, 15, 20]"></select>
+    </label>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+
             <div class="dropdown dropdown-menu-right">
-                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Table Settings
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                    <span class="glyphicon glyphicon-tasks" aria-hidden="true"></span> To Do List
                     <span class="caret"></span>
                 </button>
                 <div class="dropdown-menu">
-                    <div class="dropdown-item col-sm-offset-1" ng-repeat="column in $configCtrl.columns | orderBy : 'name'">
+                    <div class="dropdown-item col-sm-offset-1" ng-repeat="column in $ctrl.columns | orderBy : 'name'">
                         <input class="col-sm-offset-1" type="checkbox" ng-model="column.visible"
-                               ng-click="$configCtrl.setTableColumns($configCtrl.columns)"/>
-                        <label class="col-sm-offset-1 text-capitalize">{{column.name}}</label>
+                               ng-click="$ctrl.setTableColumns($ctrl.columns)"/>
+                        <label class="col-sm-offset-1 text-capitalize" style="color: black">{{column.name}}</label>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <div class="panel panel-primary" ng-controller="TodoTable as $tableCtrl">
-        <div class="panel-heading">
-            <span class="glyphicon glyphicon-tasks" aria-hidden="true"></span> To Do List
         </div>
         <div class="panel-body">
             <table class="table table-bordered table-striped">
                 <thead>
-                    <tr>
-                        <th ng-repeat="column in $configCtrl.columns | filter: { 'visible': true }">{{column.name | uppercase}}</th>
-                    </tr>
+                <tr>
+                    <th ng-repeat="column in $ctrl.columns | filter: { 'visible': true }">{{column.name | uppercase}}</th>
+                </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="item in $tableCtrl.getTodoItems() | checkedItems: $tableCtrl.showComplete | orderBy: $tableCtrl.property : $tableCtrl.reverse">
-                        <td ng-show="($configCtrl.columns | filter: {'name': 'number'})[0].visible">{{$tableCtrl.indexOfTodoItem(item) + 1}}</td>
-                        <td ng-show="($configCtrl.columns | filter: {'name': 'action'})[0].visible">{{item.action}}</td>
-                        <td ng-show="($configCtrl.columns | filter: {'name': 'done'})[0].visible">
-                            <label>{{item.done ? 'Yes' : 'No'}}</label>
-                            <input type="checkbox" ng-model="item.done"/>
-                        </td>
-                        <td ng-show="($configCtrl.columns | filter: {'name': 'deadline'})[0].visible">{{item.deadline | date}}</td>
-                        <td ng-show="($configCtrl.columns | filter: {'name': 'responsible'})[0].visible">{{item.responsible}}</td>
-                        <td ng-show="($configCtrl.columns | filter: {'name': 'estimate'})[0].visible">
-                            {{item.estimate}}
-                        </td>
-                        <td class="text-right" ng-show="($configCtrl.columns | filter: {'name': 'commands'})[0].visible">
-                            <button type="button" class="btn btn-primary" ng-click="$tableCtrl.editItem(item)" data-toggle="modal" data-target=".edit-item-dialog">
-                                <span class="glyphicon glyphicon-edit" aria-hidden="true" title="Edit"></span>
-                            </button>
-                            <button type="button" class="btn btn-danger" ng-click="$tableCtrl.removeItem(item)">
-                                <span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete"></span>
-                            </button>
-                        </td>
-                    </tr>
+                <tr ng-repeat="item in $ctrl.getTodoItems() | checkedItems: $ctrl.showComplete
+                        | filter: $ctrl.search.responsible | filter : $ctrl.search.action
+                        | limitTo : $ctrl.limit : $ctrl.currentPage * $ctrl.limit">
+                    <td ng-show="($ctrl.columns | filter: {'name': 'number'})[0].visible">{{($index + 1) + $ctrl.currentPage * $ctrl.limit}}</td>
+                    <td ng-show="($ctrl.columns | filter: {'name': 'id'})[0].visible">{{$ctrl.indexOfTodoItem(item) + 1}}</td>
+                    <td ng-show="($ctrl.columns | filter: {'name': 'action'})[0].visible">{{item.action}}</td>
+                    <td ng-show="($ctrl.columns | filter: {'name': 'done'})[0].visible">
+                        <label>{{item.done ? 'Yes' : 'No'}}</label>
+                        <input type="checkbox" ng-model="item.done"/>
+                    </td>
+                    <td ng-show="($ctrl.columns | filter: {'name': 'responsible'})[0].visible">{{item.responsible}}</td>
+                    <td ng-show="($ctrl.columns | filter: {'name': 'deadline'})[0].visible">{{item.deadline | date}}</td>
+                    <td ng-show="($ctrl.columns | filter: {'name': 'estimate'})[0].visible">
+                        {{item.estimate}}
+                    </td>
+                    <td class="text-right" ng-show="($ctrl.columns | filter: {'name': 'commands'})[0].visible">
+                        <button type="button" class="btn btn-primary" ng-click="$ctrl.editItem(item)" data-toggle="modal" data-target=".edit-item-dialog">
+                            <span class="glyphicon glyphicon-edit" aria-hidden="true" title="Edit"></span>
+                        </button>
+                        <button type="button" class="btn btn-danger" ng-click="$ctrl.removeItem(item)">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete"></span>
+                        </button>
+                    </td>
+                </tr>
                 </tbody>
             </table>
-            <label>
-                <input type="checkbox" ng-model="$tableCtrl.showComplete"/>
-                Show Complete
-            </label>
+            <button type="button" class="btn" ng-click="$ctrl.currentPage = $ctrl.currentPage - 1"
+                    ng-disabled="!$ctrl.currentPage">Prev</button>
+            <button type="button" class="btn" ng-click="$ctrl.currentPage = $ctrl.currentPage + 1"
+                    ng-disabled="!$ctrl.limit || !$ctrl.hasNextPage($ctrl.showComplete, $ctrl.search, $ctrl.currentPage, $ctrl.limit)">Next</button>
         </div>
         <div class="panel-footer">
-            <div class="row">
-                <div class="col-sm-2">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".edit-item-dialog">Add Item</button>
-                </div>
-                <div class="col-sm-offset-8 col-sm-2">
-                    <button type="button" class="btn btn-danger pull-right" ng-show="$tableCtrl.showRemoveAllCompleted()" ng-click="$tableCtrl.removeAllCompleted()">
-                        Remove all completed tasks
-                    </button>
-                </div>
-            </div>
+            <label>
+                <input type="checkbox" ng-model="$ctrl.showComplete" ng-change="$ctrl.currentPage = 0"/>
+                Show Complete
+            </label>
+            <button type="button" class="btn btn-danger" ng-show="$ctrl.showRemoveAllCompleted()" ng-click="$ctrl.removeAllCompleted()">
+                Remove all completed tasks
+            </button>
         </div>
     </div>
-
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".edit-item-dialog">Add Item</button>
 </div>

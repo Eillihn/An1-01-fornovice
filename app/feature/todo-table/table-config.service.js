@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    angular.module('tableConfig')
+    angular.module('todoTable')
         .factory('tableConfigService', tableConfigService);
 
     function tableConfigService($window, $filter, tableColumns) {

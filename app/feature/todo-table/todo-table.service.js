@@ -4,7 +4,7 @@
     angular.module('todoTable')
         .factory('todoTableService', todoTableService);
 
-    function todoTableService($rootScope, todoItemsService) {
+    function todoTableService($rootScope, todoItemsService, $filter) {
         return {
             removeItem,
             editItem,
@@ -12,7 +12,8 @@
             removeAllCompleted,
             sortBy,
             indexOfTodoItem,
-            getTodoItems
+            getTodoItems,
+            hasNextPage
         };
 
         function removeItem(item) {
@@ -47,6 +48,15 @@
 
         function indexOfTodoItem(item) {
             return todoItemsService.indexOfItem(item);
+        }
+
+        function hasNextPage(showComplete, search, currentPage, limit) {
+            let displayedItems = $filter('checkedItems')(getTodoItems(), showComplete);
+            if (!!search) {
+                displayedItems = $filter('filter')(displayedItems, search.responsible);
+                displayedItems = $filter('filter')(displayedItems, search.action);
+            }
+            return displayedItems.length - (currentPage + 1) * limit > 0;
         }
     }
 

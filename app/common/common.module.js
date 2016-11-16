@@ -3,7 +3,8 @@
 
     angular.module('common', [
         'commonDirectives',
-        'commonServices'
+        'commonServices',
+        'commonFilters'
         ]);
 
 })();
