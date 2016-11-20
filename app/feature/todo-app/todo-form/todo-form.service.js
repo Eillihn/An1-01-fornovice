@@ -15,12 +15,11 @@
             let items = todoItemsService.getTodoItems();
             if (newItem && newItem.action) {
                 let item = Object.assign({
-                    done: false
+                    done: false,
+                    deadline: Date.now()
                 }, newItem);
 
-                if (angular.isDate(item.deadline)) {
-                    item.deadline = item.deadline.getTime();
-                }
+                item.deadline = new Date(item.deadline).getTime();
 
                 let itemIndex = todoItemsService.indexOfItem(this.editedItem);
                 if (itemIndex > -1) {

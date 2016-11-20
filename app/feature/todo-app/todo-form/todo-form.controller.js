@@ -6,7 +6,7 @@
 
     function TodoForm(model, $rootScope, todoFormService) {
         let $ctrl = this;
-        $ctrl.todo = model;
+
         Object.assign($ctrl, todoFormService);
 
         $rootScope.$on('editItem', function(events, editedItem) {

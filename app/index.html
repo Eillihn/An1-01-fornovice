@@ -1,68 +1,74 @@
 <!DOCTYPE html>
-<html ng-controller="PageHeader as $ctrl">
+<html todo-app>
 
 <head>
-	<meta charset="utf-8">
-	<title>{{::$ctrl.todo.user}}'s TO DO List</title>
-	<link href="vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-	<link href="vendor/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
-	<link href="css/main.css" rel="stylesheet">
-	<link href="css/ng-cloak.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <title page-header template="title" model="$ctrl.todo"></title>
+    <link href="vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="vendor/jquery-ui/themes/base/jquery-ui.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/ng-cloak.css" rel="stylesheet">
 </head>
 
 <body ng-cloak>
 
-	<div class="container">
-		<page-header></page-header>
-		<todo-form></todo-form>
-		<todo-table></todo-table>
-	</div>
+    <div class="container">
+        <page-header model="$ctrl.todo" incomplete-count="$ctrl.incompleteCount()"></page-header>
+        <todo-form></todo-form>
+        <todo-table></todo-table>
+    </div>
 
-	<!--<div ng-controller="Rank as $ctrl"></div>-->
-	<!--<div ng-controller="RandomGenerator as $ctrl"></div>-->
-	<div ng-controller="FiltersTest as $ctrl"></div>
+    <!--<div ng-controller="Rank as $ctrl"></div>-->
+    <!--<div ng-controller="RandomGenerator as $ctrl"></div>-->
+    <!--<div ng-controller="FiltersTest as $ctrl"></div>-->
 
-	<script src="vendor/angular/angular.min.js"></script>
-	<script src="vendor/angular-sanitize/angular-sanitize.min.js"></script>
-	<script src="vendor/jquery/dist/jquery.min.js"></script>
-	<script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="vendor/angular/angular.min.js"></script>
+    <script src="vendor/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="vendor/jquery/dist/jquery.min.js"></script>
+    <script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="vendor/jquery-ui/jquery-ui.min.js"></script>
 
-	<script src="todo-app-log.decorator.js"></script>
-	<script src="app.js"></script>
+    <script src="todo-app-log.decorator.js"></script>
+    <script src="app.js"></script>
 
-	<script src="/common/common.module.js"></script>
-	<script src="/common/common.controllers.js"></script>
+    <script src="/common/common.module.js"></script>
+    <script src="/common/common.controllers.js"></script>
 
-	<script src="/common/directives/common-directives.module.js"></script>
-	<script src="/common/directives/convert-to-date.directive.js"></script>
+    <script src="/common/directives/common-directives.module.js"></script>
+    <!--<script src="/common/directives/convert-to-date.directive.js"></script>-->
+    <script src="/common/directives/convert-to-date-string.directive.js"></script>
+    <script src="/common/directives/date-picker.directive.js"></script>
 
-	<script src="/common/services/common-services.module.js"></script>
-	<script src="/common/services/rank.services.js"></script>
-	<script src="/common/services/random-generator.service.js"></script>
+    <script src="/common/services/common-services.module.js"></script>
+    <script src="/common/services/rank.services.js"></script>
+    <script src="/common/services/random-generator.service.js"></script>
 
-	<script src="/common/filters/common-filters.module.js"></script>
-	<script src="/common/filters/label-case.filter.js"></script>
-	<script src="/common/filters/byte-converter.filter.js"></script>
+    <script src="/common/filters/common-filters.module.js"></script>
+    <script src="/common/filters/label-case.filter.js"></script>
+    <script src="/common/filters/byte-converter.filter.js"></script>
 
-	<script src="/feature/feature.module.js"></script>
-	<script src="/feature/todo-items.service.js"></script>
+    <script src="/feature/feature.module.js"></script>
 
-	<script src="/feature/page-header/page-header.module.js"></script>
-	<script src="/feature/page-header/page-header.controller.js"></script>
-	<script src="/feature/page-header/page-header.service.js"></script>
-	<script src="/feature/page-header/page-header.directive.js"></script>
+    <script src="/feature/todo-app/todo-app.module.js"></script>
+    <script src="/feature/todo-app/todo-app.controller.js"></script>
+    <script src="/feature/todo-app/todo-app.directive.js"></script>
+    <script src="/feature/todo-app/todo-items.service.js"></script>
 
-	<script src="/feature/todo-table/todo-table.module.js"></script>
-	<script src="/feature/todo-table/checked-items.filter.js"></script>
-	<script src="/feature/todo-table/todo-table.directive.js"></script>
-	<script src="/feature/todo-table/todo-table.service.js"></script>
-	<script src="/feature/todo-table/todo-table.controller.js"></script>
-	<script src="/feature/todo-table/table-config.service.js"></script>
+    <script src="/feature/todo-app/page-header/page-header.module.js"></script>
+    <script src="/feature/todo-app/page-header/page-header.directive.js"></script>
 
-	<script src="/feature/todo-form/todo-form.module.js"></script>
-	<script src="/feature/todo-form/todo-form.directive.js"></script>
-	<script src="/feature/todo-form/todo-form.service.js"></script>
-	<script src="/feature/todo-form/todo-form.controller.js"></script>
+    <script src="/feature/todo-app/todo-table/todo-table.module.js"></script>
+    <script src="/feature/todo-app/todo-table/checked-items.filter.js"></script>
+    <script src="/feature/todo-app/todo-table/todo-table.directive.js"></script>
+    <script src="/feature/todo-app/todo-table/todo-table.service.js"></script>
+    <script src="/feature/todo-app/todo-table/todo-table.controller.js"></script>
+    <script src="/feature/todo-app/todo-table/table-config.service.js"></script>
+
+    <script src="/feature/todo-app/todo-form/todo-form.module.js"></script>
+    <script src="/feature/todo-app/todo-form/todo-form.directive.js"></script>
+    <script src="/feature/todo-app/todo-form/todo-form.service.js"></script>
+    <script src="/feature/todo-app/todo-form/todo-form.controller.js"></script>
 </body>
 
 </html>

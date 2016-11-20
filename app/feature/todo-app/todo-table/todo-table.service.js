@@ -6,19 +6,12 @@
 
     function todoTableService($rootScope, todoItemsService, $filter) {
         return {
-            removeItem,
             editItem,
             showRemoveAllCompleted,
             removeAllCompleted,
             sortBy,
-            indexOfTodoItem,
-            getTodoItems,
             hasNextPage
         };
-
-        function removeItem(item) {
-            todoItemsService.removeItem(item);
-        }
 
         function editItem(item) {
             $rootScope.$emit('editItem', item);
@@ -42,20 +35,7 @@
             this.property = sortName;
         }
 
-        function getTodoItems(item) {
-            return todoItemsService.getTodoItems();
-        }
-
-        function indexOfTodoItem(item) {
-            return todoItemsService.indexOfItem(item);
-        }
-
-        function hasNextPage(showComplete, search, currentPage, limit) {
-            let displayedItems = $filter('checkedItems')(getTodoItems(), showComplete);
-            if (!!search) {
-                displayedItems = $filter('filter')(displayedItems, search.responsible);
-                displayedItems = $filter('filter')(displayedItems, search.action);
-            }
+        function hasNextPage(displayedItems, currentPage, limit) {
             return displayedItems.length - (currentPage + 1) * limit > 0;
         }
     }

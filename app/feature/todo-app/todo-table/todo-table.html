@@ -1,8 +1,6 @@
-<div ng-controller="TodoTable as $ctrl">
-
+<div>
     <label>Search:
-        <input type="text" ng-model="$ctrl.search.action"
-               ng-change="$ctrl.search.responsible = $ctrl.search.action; $ctrl.currentPage = 0"/>
+        <input type="text" ng-model="$ctrl.search" ng-change="$ctrl.currentPage = 0"/>
     </label>
     <br/>
     <label>Number of tasks per page:
@@ -32,27 +30,33 @@
             <table class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                    <th ng-repeat="column in $ctrl.columns | filter: { 'visible': true }">{{column.name | uppercase}}</th>
+                    <th ng-repeat="column in $ctrl.columns | filter: { 'visible': true }">{{column.name | uppercase}}
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="item in $ctrl.getTodoItems() | checkedItems: $ctrl.showComplete
-                        | filter: $ctrl.search.responsible | filter : $ctrl.search.action
+                <tr ng-repeat="item in $ctrl.getTodoItems() | checkedItems: $ctrl.showComplete | filter: $ctrl.searchText
                         | limitTo : $ctrl.limit : $ctrl.currentPage * $ctrl.limit">
-                    <td ng-show="($ctrl.columns | filter: {'name': 'number'})[0].visible">{{($index + 1) + $ctrl.currentPage * $ctrl.limit}}</td>
-                    <td ng-show="($ctrl.columns | filter: {'name': 'id'})[0].visible">{{$ctrl.indexOfTodoItem(item) + 1}}</td>
+                    <td ng-show="($ctrl.columns | filter: {'name': 'number'})[0].visible">{{($index + 1) +
+                        $ctrl.currentPage * $ctrl.limit}}
+                    </td>
+                    <td ng-show="($ctrl.columns | filter: {'name': 'id'})[0].visible">{{$ctrl.indexOfTodoItem(item) +
+                        1}}
+                    </td>
                     <td ng-show="($ctrl.columns | filter: {'name': 'action'})[0].visible">{{item.action}}</td>
                     <td ng-show="($ctrl.columns | filter: {'name': 'done'})[0].visible">
                         <label>{{item.done ? 'Yes' : 'No'}}</label>
                         <input type="checkbox" ng-model="item.done"/>
                     </td>
                     <td ng-show="($ctrl.columns | filter: {'name': 'responsible'})[0].visible">{{item.responsible}}</td>
-                    <td ng-show="($ctrl.columns | filter: {'name': 'deadline'})[0].visible">{{item.deadline | date}}</td>
+                    <td ng-show="($ctrl.columns | filter: {'name': 'deadline'})[0].visible">{{item.deadline | date}}
+                    </td>
                     <td ng-show="($ctrl.columns | filter: {'name': 'estimate'})[0].visible">
                         {{item.estimate}}
                     </td>
                     <td class="text-right" ng-show="($ctrl.columns | filter: {'name': 'commands'})[0].visible">
-                        <button type="button" class="btn btn-primary" ng-click="$ctrl.editItem(item)" data-toggle="modal" data-target=".edit-item-dialog">
+                        <button type="button" class="btn btn-primary" ng-click="$ctrl.editItem(item)"
+                                data-toggle="modal" data-target=".edit-item-dialog">
                             <span class="glyphicon glyphicon-edit" aria-hidden="true" title="Edit"></span>
                         </button>
                         <button type="button" class="btn btn-danger" ng-click="$ctrl.removeItem(item)">
@@ -63,16 +67,20 @@
                 </tbody>
             </table>
             <button type="button" class="btn" ng-click="$ctrl.currentPage = $ctrl.currentPage - 1"
-                    ng-disabled="!$ctrl.currentPage">Prev</button>
+                    ng-disabled="!$ctrl.currentPage">Prev
+            </button>
             <button type="button" class="btn" ng-click="$ctrl.currentPage = $ctrl.currentPage + 1"
-                    ng-disabled="!$ctrl.limit || !$ctrl.hasNextPage($ctrl.showComplete, $ctrl.search, $ctrl.currentPage, $ctrl.limit)">Next</button>
+                    ng-disabled="!$ctrl.limit || !$ctrl.hasNextPage(($ctrl.getTodoItems() | checkedItems: $ctrl.showComplete | filter: $ctrl.searchText), $ctrl.currentPage, $ctrl.limit)">
+                Next
+            </button>
         </div>
         <div class="panel-footer">
             <label>
                 <input type="checkbox" ng-model="$ctrl.showComplete" ng-change="$ctrl.currentPage = 0"/>
                 Show Complete
             </label>
-            <button type="button" class="btn btn-danger" ng-show="$ctrl.showRemoveAllCompleted()" ng-click="$ctrl.removeAllCompleted()">
+            <button type="button" class="btn btn-danger" ng-show="$ctrl.showRemoveAllCompleted()"
+                    ng-click="$ctrl.removeAllCompleted()">
                 Remove all completed tasks
             </button>
         </div>

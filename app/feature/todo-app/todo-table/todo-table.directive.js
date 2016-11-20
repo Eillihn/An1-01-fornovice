@@ -6,8 +6,10 @@
 
     function todoTable() {
         return {
-            restrict: 'EA',
-            templateUrl: '/feature/todo-table/todo-table.html'
+            restrict: 'E',
+            templateUrl: 'feature/todo-app/todo-table/todo-table.html',
+            controller: 'TodoTable',
+            controllerAs: '$ctrl'
         }
     }
 

@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    angular.module('feature')
+    angular.module('todoApp')
         .factory('todoItemsService', todoItemsService);
 
     function todoItemsService(model, $filter) {
@@ -10,6 +10,8 @@
             setTodoItems,
             getCompletedTodoItems,
             getIncompletedTodoItems,
+            incompleteCount,
+            completeCount,
             removeItem,
             replaceItem,
             addItem,
@@ -34,6 +36,14 @@
             return $filter('filter')(model.items, {
                 done: false
             });
+        }
+
+        function incompleteCount() {
+            return getIncompletedTodoItems().length;
+        }
+
+        function completeCount() {
+            return getCompletedTodoItems().length;
         }
 
         function removeItem(item) {
