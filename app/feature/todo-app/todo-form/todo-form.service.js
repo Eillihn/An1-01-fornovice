@@ -1,10 +1,10 @@
 (function() {
     'use strict';
 
-    angular.module('todoForm')
+    angular.module('todoApp')
         .factory('todoFormService', todoFormService);
 
-    function todoFormService(todoItemsService) {
+    function todoFormService() {
         return {
             saveItem,
             cleanForm,
@@ -12,7 +12,7 @@
         };
 
         function saveItem(newItem) {
-            let items = todoItemsService.getTodoItems();
+            let items = this.todoApp.getTodoItems();
             if (newItem && newItem.action) {
                 let item = Object.assign({
                     done: false,
@@ -21,11 +21,11 @@
 
                 item.deadline = new Date(item.deadline).getTime();
 
-                let itemIndex = todoItemsService.indexOfItem(this.editedItem);
+                let itemIndex = this.todoApp.indexOfItem(this.editedItem);
                 if (itemIndex > -1) {
-                    todoItemsService.replaceItem(itemIndex, item);
+                    this.todoApp.replaceItem(itemIndex, item);
                 } else {
-                    todoItemsService.addItem(item);
+                    this.todoApp.addItem(item);
                 }
             }
             this.cleanForm();

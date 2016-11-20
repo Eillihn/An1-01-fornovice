@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html todo-app>
+<html>
 
 <head>
     <meta charset="utf-8">
-    <title page-header template="title" model="$ctrl.todo"></title>
+    <title page-title></title>
     <link href="vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="vendor/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="vendor/jquery-ui/themes/base/jquery-ui.min.css" rel="stylesheet">
@@ -13,11 +13,15 @@
 
 <body ng-cloak>
 
-    <div class="container">
-        <page-header model="$ctrl.todo" incomplete-count="$ctrl.incompleteCount()"></page-header>
+    <todo-app>
+        <todo-header></todo-header>
         <todo-form></todo-form>
-        <todo-table></todo-table>
-    </div>
+        <todo-table>
+            <table-config></table-config>
+            <paging></paging>
+            <search-filter></search-filter>
+        </todo-table>
+    </todo-app>
 
     <!--<div ng-controller="Rank as $ctrl"></div>-->
     <!--<div ng-controller="RandomGenerator as $ctrl"></div>-->
@@ -49,26 +53,35 @@
     <script src="/common/filters/byte-converter.filter.js"></script>
 
     <script src="/feature/feature.module.js"></script>
+    <script src="/feature/page-title.directive.js"></script>
 
     <script src="/feature/todo-app/todo-app.module.js"></script>
     <script src="/feature/todo-app/todo-app.controller.js"></script>
-    <script src="/feature/todo-app/todo-app.directive.js"></script>
+    <script src="/feature/todo-app/todo-app.component.js"></script>
     <script src="/feature/todo-app/todo-items.service.js"></script>
 
-    <script src="/feature/todo-app/page-header/page-header.module.js"></script>
-    <script src="/feature/todo-app/page-header/page-header.directive.js"></script>
+    <script src="/feature/todo-app/todo-header/todo-header.component.js"></script>
 
-    <script src="/feature/todo-app/todo-table/todo-table.module.js"></script>
     <script src="/feature/todo-app/todo-table/checked-items.filter.js"></script>
-    <script src="/feature/todo-app/todo-table/todo-table.directive.js"></script>
+    <script src="/feature/todo-app/todo-table/todo-table.component.js"></script>
     <script src="/feature/todo-app/todo-table/todo-table.service.js"></script>
     <script src="/feature/todo-app/todo-table/todo-table.controller.js"></script>
-    <script src="/feature/todo-app/todo-table/table-config.service.js"></script>
 
-    <script src="/feature/todo-app/todo-form/todo-form.module.js"></script>
-    <script src="/feature/todo-app/todo-form/todo-form.directive.js"></script>
+    <script src="/feature/todo-app/todo-form/todo-form.component.js"></script>
     <script src="/feature/todo-app/todo-form/todo-form.service.js"></script>
     <script src="/feature/todo-app/todo-form/todo-form.controller.js"></script>
+
+    <script src="/feature/todo-app/paging/paging.component.js"></script>
+    <script src="/feature/todo-app/paging/paging.controller.js"></script>
+    <script src="/feature/todo-app/paging/paging.service.js"></script>
+
+    <script src="/feature/todo-app/search-filter/search-filter.component.js"></script>
+    <script src="/feature/todo-app/search-filter/search-filter.controller.js"></script>
+    <script src="/feature/todo-app/search-filter/search-filter.service.js"></script>
+
+    <script src="/feature/todo-app/table-config/table-config.component.js"></script>
+    <script src="/feature/todo-app/table-config/table-config.controller.js"></script>
+    <script src="/feature/todo-app/table-config/table-config.service.js"></script>
 </body>
 
 </html>

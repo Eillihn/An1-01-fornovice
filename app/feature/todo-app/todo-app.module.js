@@ -1,11 +1,7 @@
 (function() {
     'use strict';
 
-    angular.module('todoApp', [
-            'pageHeader',
-            'todoForm',
-            'todoTable'
-        ])
+    angular.module('todoApp', [])
         .run(runTodoApp)
         .value('model', {
             'user': 'Vitaliy',

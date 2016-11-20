@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    angular.module('todoForm')
+    angular.module('todoApp')
         .controller('TodoForm', TodoForm);
 
     function TodoForm(model, $rootScope, todoFormService) {
