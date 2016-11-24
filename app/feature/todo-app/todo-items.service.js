@@ -20,7 +20,7 @@
         };
 
         function getTodoItems() {
-            return model.items;
+            return model.items || [];
         }
 
         function setTodoItems(items) {
@@ -28,13 +28,13 @@
         }
 
         function getCompletedTodoItems() {
-            return $filter('filter')(model.items, {
+            return $filter('filter')(getTodoItems(), {
                 done: true
             });
         }
 
         function getIncompletedTodoItems() {
-            return $filter('filter')(model.items, {
+            return $filter('filter')(getTodoItems(), {
                 done: false
             });
         }

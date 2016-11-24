@@ -2,39 +2,10 @@
     'use strict';
 
     angular.module('todoApp')
-    .value("tableColumns", [{
-            "name": "number",
-            "visible": true
-        },{
-            "name": "id",
-            "visible": false
-        },{
-            "name": "action",
-            "visible": true
-        },{
-            "name": "done",
-            "visible": true
-        },{
-            "name": "deadline",
-            "visible": true
-        },{
-            "name": "responsible",
-            "visible": true
-        },{
-            "name": "estimate",
-            "visible": true
-        },{
-            "name": "commands",
-            "visible": true
-        }])
         .factory('tableConfigService', tableConfigService);
 
     function tableConfigService($window, $filter, tableColumns) {
         let columns = getTableColumns();
-        if (!columns) {
-            columns = tableColumns;
-        }
-        setTableColumns(columns);
 
         return {
             setTableColumns,
@@ -51,7 +22,7 @@
 
         function getTableColumns() {
            var columnsJson = $window.localStorage.getItem('table-columns');
-           return JSON.parse(columnsJson);
+           return JSON.parse(columnsJson) || [];
         }
 
         function isVisibleColumn(fieldName) {
