@@ -1,27 +1,23 @@
 (function() {
     'use strict';
 
-    angular.module('todoTable')
+    angular.module('todoApp')
         .controller('TodoTable', TodoTable);
 
-    function TodoTable(todoTableService, tableConfigService, todoItemsService) {
+    function TodoTable(todoTableService) {
         let $ctrl = this;
 
-        $ctrl.columns = tableConfigService.getTableColumns();
-        $ctrl.currentPage = 0;
-        $ctrl.limit = 5;
-
         Object.assign($ctrl, todoTableService);
-        Object.assign($ctrl, todoItemsService);
 
         $ctrl.searchText = function (item) {
-            if (!$ctrl.search) {
+            let search = $ctrl.getSearch();
+            if (!search) {
                 return true;
             }
 
-            let iAction = item.action.toLowerCase();
-            let iResponsible = item.responsible.toLowerCase();
-            let search = ('' + $ctrl.search).toLowerCase();
+            let iAction = !item.action ? '' : item.action.toLowerCase();
+            let iResponsible = !item.responsible ? '' : item.responsible.toLowerCase();
+            search = ('' + search).toLowerCase();
 
             return iAction.indexOf(search) > -1 || iResponsible.indexOf(search) > -1;
         }

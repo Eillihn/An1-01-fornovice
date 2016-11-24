@@ -15,7 +15,8 @@
             removeItem,
             replaceItem,
             addItem,
-            indexOfItem
+            indexOfItem,
+            removeAllCompleted
         };
 
         function getTodoItems() {
@@ -67,6 +68,15 @@
         function indexOfItem(item) {
             let items = getTodoItems();
             return items.indexOf(item);
+        }
+
+        function removeAllCompleted() {
+            let items = getTodoItems();
+            let completedItems = getCompletedTodoItems();
+
+            angular.forEach(completedItems, (item) => {
+                removeItem(item);
+            });
         }
 
     }
