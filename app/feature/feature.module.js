@@ -2,7 +2,8 @@
     'use strict';
 
     angular.module('feature', [
-            'todoApp'
-        ]);
+        'users',
+        'tasks'
+    ]);
 
 })();

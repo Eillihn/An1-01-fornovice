@@ -1,0 +1,61 @@
+<div>
+
+    <div ng-transclude="searchFilter"></div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+
+            <div ng-transclude="tableConfig"></div>
+
+        </div>
+        <div class="panel-body">
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th ng-repeat="column in $ctrl.columns | filter: { 'visible': true }">{{column.name | uppercase}}
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in $ctrl.getTasks() | limitTo : $ctrl.getLimit() : $ctrl.getSkipCount()">
+                    <td ng-show="$ctrl.isVisibleProperty('number')">{{($index + 1) +
+                        $ctrl.getSkipCount()}}
+                    </td>
+                    <td ng-show="$ctrl.isVisibleProperty('id')">{{item.id}}</td>
+                    <td ng-show="$ctrl.isVisibleProperty('action')">{{item.action}}</td>
+                    <td ng-show="$ctrl.isVisibleProperty('done')">
+                        <label>{{item.done ? 'Yes' : 'No'}}</label>
+                        <input type="checkbox" ng-model="item.done"/>
+                    </td>
+                    <td ng-show="$ctrl.isVisibleProperty('deadline')">{{item.deadline | date}}</td>
+                    <td ng-show="$ctrl.isVisibleProperty('responsible')"><a ng-href="#/userTasks/{{item.userId}}">{{$ctrl.getUserName(item.userId)}}</a>
+                    </td>
+                    <td ng-show="$ctrl.isVisibleProperty('estimate')">{{item.estimate}}</td>
+                    <td class="text-right" ng-show="$ctrl.isVisibleProperty('commands')">
+                        <button type="button" class="btn btn-primary" ng-click="$ctrl.go('/editTask/' + item.id)"
+                                data-toggle="modal" data-target=".edit-item-dialog">
+                            <span class="glyphicon glyphicon-edit" aria-hidden="true" title="Edit"></span>
+                        </button>
+                        <button type="button" class="btn btn-danger" ng-click="$ctrl.go('/deleteTask/' + item.id)">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete"></span>
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div ng-transclude="paging"></div>
+        </div>
+        <div class="panel-footer">
+            <label>
+                <input type="checkbox" ng-model="$ctrl.showComplete" ng-change="$ctrl.toStartPage()"/>
+                Show Complete
+            </label>
+            <button type="button" class="btn btn-danger" ng-show="$ctrl.showRemoveAllCompleted()"
+                    ng-click="$ctrl.removeAllCompleted()">
+                Remove all completed tasks
+            </button>
+        </div>
+    </div>
+    <button type="button" class="btn btn-primary" ng-click="$ctrl.go('/createTask')">Add Item</button>
+</div>

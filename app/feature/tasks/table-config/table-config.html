@@ -1,0 +1,13 @@
+<div class="dropdown dropdown-menu-right">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+        <span class="glyphicon glyphicon-tasks" aria-hidden="true"></span> To Do List
+        <span class="caret"></span>
+    </button>
+    <div class="dropdown-menu">
+        <div class="dropdown-item col-sm-offset-1" ng-repeat="column in $ctrl.columns | orderBy : 'name'">
+            <input class="col-sm-offset-1" type="checkbox" ng-model="column.visible"
+                   ng-click="$ctrl.updateTaskProperties($ctrl.columns)"/>
+            <label class="col-sm-offset-1 text-capitalize" style="color: black">{{column.name}}</label>
+        </div>
+    </div>
+</div>

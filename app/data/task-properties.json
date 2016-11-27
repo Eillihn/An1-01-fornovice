@@ -1,0 +1,42 @@
+[
+  {
+    "name": "number",
+    "visible": false,
+    "editable": false
+  },
+  {
+    "name": "id",
+    "visible": true,
+    "editable": false
+  },
+  {
+    "name": "action",
+    "visible": true,
+    "editable": true
+  },
+  {
+    "name": "done",
+    "visible": true,
+    "editable": true
+  },
+  {
+    "name": "deadline",
+    "visible": true,
+    "editable": true
+  },
+  {
+    "name": "responsible",
+    "visible": true,
+    "editable": true
+  },
+  {
+    "name": "estimate",
+    "visible": true,
+    "editable": true
+  },
+  {
+    "name": "commands",
+    "visible": true,
+    "editable": false
+  }
+]

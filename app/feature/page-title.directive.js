@@ -7,12 +7,15 @@
     function pageTitle() {
         return {
             restrict: 'A',
-            template: `{{::$ctrl.user}}'s TO DO List`,
+            template: `{{$ctrl.getUserName()}}TO DO List`,
             controllerAs: '$ctrl',
-            controller: function(model) {
+            controller: function($routeParams, usersService) {
                 let $ctrl = this;
 
-                $ctrl.user = model.user;
+                $ctrl.getUserName = function() {
+                    let userId = $routeParams['userId'];
+                    return userId ? `${usersService.getUserName(userId)} + 's` : '';
+                };
             }
         }
     }
