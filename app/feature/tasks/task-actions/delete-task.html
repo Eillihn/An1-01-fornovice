@@ -1,14 +1,15 @@
 <div>
     <h3>Delete Task</h3>
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-6">
             <table class="table table-striped">
                 <tr class="form-group" ng-repeat="prop in $ctrl.properties">
                     <td>
                         <label class="control-label text-capitalize">{{prop.name}}</label>
                     </td>
                     <td>
-                        {{prop.name !== 'deadline' ? $ctrl.task[prop.name] : ($ctrl.task.deadline | date)}}
+                        {{prop.name === 'deadline' ? ($ctrl.task.deadline | date) :
+                            prop.name === 'responsible' ? $ctrl.getUserName($ctrl.task['userId']): $ctrl.task[prop.name]}}
                     </td>
                 </tr>
             </table>

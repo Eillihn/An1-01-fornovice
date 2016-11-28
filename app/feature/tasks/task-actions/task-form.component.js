@@ -3,8 +3,8 @@
 
     angular.module('tasks')
         .component('taskForm', {
-            templateUrl: 'feature/tasks/task-form/task-form.html',
-            controller: 'TaskForm'
+            templateUrl: './feature/tasks/task-actions/task-form.html',
+            controller: 'TaskForm',
         });
 
 })();

@@ -18,14 +18,14 @@
                 <a class="navbar-brand" href="index.html#/">Task Manager</a>
             </div>
             <ul class="nav navbar-nav">
-                <li><a ng-href="#/">Tasks</a></li>
-                <li><a ng-href="#/users">Users</a></li>
+                <li ui-sref-active="active"><a ui-sref="home">Tasks</a></li>
+                <li ui-sref-active="active"><a ui-sref="users">Users</a></li>
             </ul>
         </div>
     </nav>
 
     <div class="container">
-        <div ng-view></div>
+        <div ui-view></div>
     </div>
 
     <!--<div ng-controller="Rank as $ctrl"></div>-->
@@ -34,7 +34,7 @@
 
     <script src="vendor/angular/angular.min.js"></script>
     <script src="vendor/angular-sanitize/angular-sanitize.min.js"></script>
-    <script src="vendor/angular-route/angular-route.min.js"></script>
+    <script src="vendor/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="vendor/jquery/dist/jquery.min.js"></script>
     <script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="vendor/jquery-ui/jquery-ui.min.js"></script>
@@ -54,6 +54,7 @@
     <script src="/common/services/common-services.module.js"></script>
     <script src="/common/services/rank.services.js"></script>
     <script src="/common/services/random-generator.service.js"></script>
+    <script src="/common/services/state-router.service.js"></script>
 
     <script src="/common/filters/common-filters.module.js"></script>
     <script src="/common/filters/label-case.filter.js"></script>
@@ -63,10 +64,11 @@
     <script src="/feature/page-title.directive.js"></script>
 
     <script src="/feature/tasks/tasks.module.js"></script>
-    <script src="/feature/tasks/tasks.controller.js"></script>
-    <script src="/feature/tasks/tasks.component.js"></script>
-    <script src="/feature/tasks/tasks.service.js"></script>
     <script src="/feature/tasks/tasks-storage.service.js"></script>
+    <script src="/feature/tasks/tasks.service.js"></script>
+
+    <script src="/feature/tasks/task-list/task-list.controller.js"></script>
+    <script src="/feature/tasks/task-list/task-list.component.js"></script>
 
     <script src="/feature/tasks/todo-header/todo-header.component.js"></script>
 
@@ -78,8 +80,10 @@
     <script src="/feature/tasks/task-actions/task-form.component.js"></script>
     <script src="/feature/tasks/task-actions/task-form.service.js"></script>
     <script src="/feature/tasks/task-actions/task-form.controller.js"></script>
+
     <script src="/feature/tasks/task-actions/delete-task.controller.js"></script>
     <script src="/feature/tasks/task-actions/delete-task.service.js"></script>
+    <script src="/feature/tasks/task-actions/delete-task.component.js"></script>
 
     <script src="/feature/tasks/todo-table/paging/paging.component.js"></script>
     <script src="/feature/tasks/todo-table/paging/paging.controller.js"></script>
@@ -96,12 +100,17 @@
     <script src="/feature/users/users.module.js"></script>
     <script src="/feature/users/users.service.js"></script>
     <script src="/feature/users/users-storage.service.js"></script>
-    <script src="/feature/users/user-list.controller.js"></script>
+
+    <script src="/feature/users/user-list/user-list.controller.js"></script>
+    <script src="/feature/users/user-list/user-list.component.js"></script>
 
     <script src="/feature/users/user-actions/user-form.service.js"></script>
     <script src="/feature/users/user-actions/user-form.controller.js"></script>
+    <script src="/feature/users/user-actions/user-form.component.js"></script>
+
     <script src="/feature/users/user-actions/delete-user.controller.js"></script>
     <script src="/feature/users/user-actions/delete-user.service.js"></script>
+    <script src="/feature/users/user-actions/delete-user.component.js"></script>
 </body>
 
 </html>

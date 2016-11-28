@@ -1,6 +1,6 @@
 <div>
     <h3 class="modal-title">
-        Delete User: <a ng-href="#/userTasks/{{$ctrl.user.id}}">{{$ctrl.user.name}}</a>
+        Delete User: <a ui-sref="userTasks({userId: $ctrl.user.id})">{{$ctrl.user.name}}</a>
     </h3>
 
     <button type="button" class="btn btn-danger"
@@ -9,6 +9,6 @@
     </button>
 
     <div class="alert alert-danger" ng-show="$ctrl.hasTasks()">
-        <strong>Oops!</strong> This user cannot be deleted at this time because there are <a ng-href="#/userTasks/{{$ctrl.user.id}}">tasks assigned to them</a>.
+        <strong>Oops!</strong> This user cannot be deleted at this time because there are <a ui-sref="userTasks({userId: $ctrl.user.id})">tasks assigned to them</a>.
     </div>
 </div>

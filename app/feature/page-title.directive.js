@@ -9,11 +9,11 @@
             restrict: 'A',
             template: `{{$ctrl.getUserName()}}TO DO List`,
             controllerAs: '$ctrl',
-            controller: function($routeParams, usersService) {
+            controller: function($stateParams, usersService) {
                 let $ctrl = this;
 
                 $ctrl.getUserName = function() {
-                    let userId = $routeParams['userId'];
+                    let userId = parseInt($stateParams['userId']);
                     return userId ? `${usersService.getUserName(userId)} + 's` : '';
                 };
             }

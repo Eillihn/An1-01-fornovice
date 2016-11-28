@@ -3,7 +3,7 @@
 
     angular.module('app', [
             'ngSanitize',
-            'ngRoute',
+            'ui.router',
             'common',
             'feature'
         ])

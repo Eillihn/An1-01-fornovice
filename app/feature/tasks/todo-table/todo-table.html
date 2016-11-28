@@ -28,15 +28,15 @@
                         <input type="checkbox" ng-model="item.done"/>
                     </td>
                     <td ng-show="$ctrl.isVisibleProperty('deadline')">{{item.deadline | date}}</td>
-                    <td ng-show="$ctrl.isVisibleProperty('responsible')"><a ng-href="#/userTasks/{{item.userId}}">{{$ctrl.getUserName(item.userId)}}</a>
+                    <td ng-show="$ctrl.isVisibleProperty('responsible')"><a  ui-sref="userTasks({userId: item.userId})">{{$ctrl.getUserName(item.userId)}}</a>
                     </td>
                     <td ng-show="$ctrl.isVisibleProperty('estimate')">{{item.estimate}}</td>
                     <td class="text-right" ng-show="$ctrl.isVisibleProperty('commands')">
-                        <button type="button" class="btn btn-primary" ng-click="$ctrl.go('/editTask/' + item.id)"
+                        <button type="button" class="btn btn-primary" ng-click="$ctrl.navigate('editTask', {taskId: item.id})"
                                 data-toggle="modal" data-target=".edit-item-dialog">
                             <span class="glyphicon glyphicon-edit" aria-hidden="true" title="Edit"></span>
                         </button>
-                        <button type="button" class="btn btn-danger" ng-click="$ctrl.go('/deleteTask/' + item.id)">
+                        <button type="button" class="btn btn-danger" ng-click="$ctrl.navigate('deleteTask', {taskId: item.id})">
                             <span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete"></span>
                         </button>
                     </td>
@@ -57,5 +57,5 @@
             </button>
         </div>
     </div>
-    <button type="button" class="btn btn-primary" ng-click="$ctrl.go('/createTask')">Add Item</button>
+    <button type="button" class="btn btn-primary" ng-click="$ctrl.navigate('createTask')">Add Item</button>
 </div>

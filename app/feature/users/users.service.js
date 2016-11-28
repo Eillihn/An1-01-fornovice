@@ -4,13 +4,12 @@
         .module('users')
         .factory('usersService', usersService);
 
-    function usersService($filter, usersStorageService, $location) {
+    function usersService($filter, usersStorageService) {
         let users = [];
 
         return {
             getUsers,
             getUserName,
-            go,
             addUser,
             removeUser,
             replaceUser,
@@ -30,17 +29,13 @@
             let users = getUsers(),
                 filterUsers = $filter('filter')(users, {
                     id: userId
-                });
+                }, true);
 
             if (filterUsers.length) {
                 return filterUsers[0].name;
             } else {
                 return userId;
             }
-        }
-
-        function go(path) {
-            $location.path(path);
         }
 
         function addUser(item) {

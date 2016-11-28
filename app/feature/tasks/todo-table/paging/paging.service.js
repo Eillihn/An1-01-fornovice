@@ -4,7 +4,7 @@
     angular.module('tasks')
         .factory('pagingService', pagingService);
 
-    function pagingService($routeParams) {
+    function pagingService() {
         return {
             hasNextPage,
             toStartPage,

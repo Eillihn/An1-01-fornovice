@@ -4,10 +4,9 @@
     angular.module('tasks')
         .factory('todoTableService', todoTableService);
 
-    function todoTableService($location, $filter, $routeParams) {
+    function todoTableService($filter, $stateParams) {
         return {
             indexOfItem,
-            go,
             removeTask,
             showRemoveAllCompleted,
             removeAllCompleted,
@@ -28,10 +27,6 @@
 
         function indexOfItem(item) {
             return this.taskList.indexOfItem(item);
-        }
-
-        function go(path) {
-            $location.path(path);
         }
 
         function removeTask(item) {

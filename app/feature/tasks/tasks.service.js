@@ -4,7 +4,7 @@
     angular.module('tasks')
         .factory('tasksService', tasksService);
 
-    function tasksService($filter, $routeParams, usersService, tasksStorageService) {
+    function tasksService($filter, $stateParams, usersService, tasksStorageService) {
 
         return {
             getAllTasks,
@@ -86,7 +86,7 @@
         }
 
         function getTasks() {
-            let userId = parseInt($routeParams['userId']),
+            let userId = parseInt($stateParams['userId']),
                 tasks = getAllTasks();
 
             return !Number.isNaN(userId) ? $filter('filter')(tasks, {
@@ -94,7 +94,7 @@
             }, true) : tasks;
         }
 
-        function getUserName(userId = parseInt($routeParams['userId'])) {
+        function getUserName(userId = parseInt($stateParams['userId'])) {
             return usersService.getUserName(userId);
         }
 
