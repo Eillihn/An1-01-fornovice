@@ -1,0 +1,20 @@
+<div>
+    <h3 class="modal-title">{{$ctrl.getUserId() ? 'Update User' : 'Create User'}}</h3>
+    <div class="panel">
+        <form novalidate name="newTask" class="form-horizontal">
+            <div class="form-group">
+                <label for="name" class="control-label col-sm-2">Name:</label>
+                <div class="col-sm-6">
+                    <input id="name" name="name" class="form-control" ng-model="$ctrl.newItem.name"/>
+                </div>
+            </div>
+        </form>
+    </div>
+    <button type="button" class="btn btn-secondary" ng-click="$ctrl.resetForm()">
+        Reset
+    </button>
+    <button type="button" class="btn btn-primary"
+            ng-click="$ctrl.saveItem($ctrl.newItem)" ng-hide="!$ctrl.newItem.name">
+        Save
+    </button>
+</div>

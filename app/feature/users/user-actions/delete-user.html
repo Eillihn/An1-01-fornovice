@@ -1,0 +1,14 @@
+<div>
+    <h3 class="modal-title">
+        Delete User: <a ng-href="#/userTasks/{{$ctrl.user.id}}">{{$ctrl.user.name}}</a>
+    </h3>
+
+    <button type="button" class="btn btn-danger"
+            ng-click="$ctrl.deleteUser($ctrl.user)" ng-hide="$ctrl.hasTasks()">
+        Delete
+    </button>
+
+    <div class="alert alert-danger" ng-show="$ctrl.hasTasks()">
+        <strong>Oops!</strong> This user cannot be deleted at this time because there are <a ng-href="#/userTasks/{{$ctrl.user.id}}">tasks assigned to them</a>.
+    </div>
+</div>
