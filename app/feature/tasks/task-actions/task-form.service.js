@@ -4,7 +4,7 @@
     angular.module('tasks')
         .factory('todoFormService', todoFormService);
 
-    function todoFormService(tasksService, usersService, $routeParams, $location, $route) {
+    function todoFormService(tasksService, usersService, $stateParams, $location, $state) {
         return {
             saveItem,
             resetForm,
@@ -35,11 +35,11 @@
         }
 
         function resetForm() {
-            $route.reload();
+            $state.reload();
         }
 
         function getTaskId() {
-            return parseInt($routeParams['taskId']);
+            return parseInt($stateParams['taskId']);
         }
 
         function getUsers() {

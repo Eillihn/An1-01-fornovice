@@ -4,11 +4,12 @@
     angular.module('tasks')
         .factory('deleteTaskService', deleteTaskService);
 
-    function deleteTaskService(tasksService, taskPropertiesService, $filter, $routeParams, $location) {
+    function deleteTaskService(tasksService, usersService, taskPropertiesService, $filter, $stateParams, $location) {
         return {
             deleteTask,
             getTask,
-            getProperties
+            getProperties,
+            getUserName
         };
 
         function deleteTask(task) {
@@ -17,7 +18,7 @@
         }
 
         function getTask() {
-            return tasksService.getTask(parseInt($routeParams['taskId']));
+            return tasksService.getTask(parseInt($stateParams['taskId']));
         }
 
         function getProperties() {
@@ -26,6 +27,10 @@
             return $filter('filter')(properties, {
                 editable: true
             });
+        }
+
+        function getUserName(userId) {
+            return usersService.getUserName(userId);
         }
     }
 

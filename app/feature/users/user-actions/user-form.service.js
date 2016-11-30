@@ -3,7 +3,7 @@
     angular.module('users')
         .service('userFormService', userFormService);
 
-    function userFormService(usersService, $routeParams, $location, $route) {
+    function userFormService(usersService, $stateParams, $location, $state) {
         return {
             saveItem,
             resetForm,
@@ -24,11 +24,11 @@
         }
 
         function resetForm() {
-            $route.reload();
+            $state.reload();
         }
 
         function getUserId() {
-            return parseInt($routeParams['userId']);
+            return parseInt($stateParams['userId']);
         }
     }
 

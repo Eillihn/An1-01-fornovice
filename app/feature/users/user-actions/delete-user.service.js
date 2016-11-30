@@ -4,7 +4,7 @@
     angular.module('users')
         .factory('deleteUserService', deleteUserService);
 
-    function deleteUserService(usersService, tasksService, $filter, $routeParams, $location) {
+    function deleteUserService(usersService, tasksService, $filter, $stateParams, $location) {
         return {
             deleteUser,
             getUser,
@@ -17,7 +17,7 @@
         }
 
         function getUser() {
-            return usersService.getUser(parseInt($routeParams['userId']));
+            return usersService.getUser(parseInt($stateParams['userId']));
         }
 
         function hasTasks() {

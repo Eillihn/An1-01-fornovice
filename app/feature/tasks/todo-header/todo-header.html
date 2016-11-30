@@ -1,6 +1,6 @@
-<div class="page-header" ng-hide="{{!$ctrl.taskList.getUserName()}}">
+<div class="page-header">
     <h1>
-        {{$ctrl.taskList.getUserName()}}'s To Do List
+        <span ng-hide="{{!$ctrl.taskList.getUserName()}}">{{$ctrl.taskList.getUserName()}}'s </span>To Do List
         <span class="label label-default"
               ng-class="$ctrl.taskList.incompleteCount() < 3 ? 'label-success' : 'label-warning'"
               ng-hide="$ctrl.taskList.incompleteCount() === 0">

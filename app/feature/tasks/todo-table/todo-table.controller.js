@@ -4,12 +4,13 @@
     angular.module('tasks')
         .controller('TodoTable', TodoTable);
 
-    function TodoTable(todoTableService) {
+    function TodoTable(todoTableService, stateRouter) {
         let $ctrl = this;
 
         Object.assign($ctrl, todoTableService);
 
         $ctrl.showComplete = true;
+        $ctrl.navigate = stateRouter.navigate;
 
         $ctrl.searchText = function(item) {
             let search = $ctrl.getSearch();

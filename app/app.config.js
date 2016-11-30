@@ -3,10 +3,34 @@
     angular.module('app')
         .config(configAppRouter);
 
-    function configAppRouter($routeProvider, $locationProvider) {
-        $routeProvider.
-        when('/', {
-                templateUrl: './feature/tasks/task-list.html',
+	function configAppRouter($stateProvider, $urlRouterProvider) {
+	    $urlRouterProvider.otherwise('/');
+		$stateProvider
+            .state('home', {
+                url: '/',
+                template: '<task-list></task-list>',
+                resolve: {
+                    data: function($q, taskPropertiesService, tasksStorageService, usersStorageService) {
+                        return $q.all([
+                            taskPropertiesService.getData(),
+                            tasksStorageService.getData(),
+                            usersStorageService.getData()
+                        ]);
+                    }
+                }
+                })
+            .state('users', {
+                url: '/users',
+                template: '<user-list></user-list>',
+                resolve: {
+                    data: function(usersStorageService) {
+                        return usersStorageService.getData();
+                    }
+                }
+            })
+            .state('userTasks', {
+                url: '/userTasks/:userId',
+                template: '<task-list></task-list>',
                 resolve: {
                     data: function($q, taskPropertiesService, tasksStorageService, usersStorageService) {
                         return $q.all([
@@ -17,18 +41,33 @@
                     }
                 }
             })
-            .when('/users', {
-                templateUrl: './feature/users/user-list.html',
-                controller: 'UserList',
-                controllerAs: '$ctrl',
+            .state('createTask', {
+                url: '/createTask',
+                template: '<task-form></task-form>',
                 resolve: {
-                    data: function(usersStorageService) {
+                    users: function(usersStorageService) {
                         return usersStorageService.getData();
+                    },
+                    tasks: function(tasksStorageService) {
+                        return tasksStorageService.getData();
                     }
                 }
             })
-            .when('/userTasks/:userId', {
-                templateUrl: './feature/tasks/task-list.html',
+            .state('editTask', {
+                url: '/editTask/:taskId',
+                template: '<task-form></task-form>',
+                resolve: {
+                    users: function(usersStorageService) {
+                        return usersStorageService.getData();
+                    },
+                    tasks: function(tasksStorageService) {
+                        return tasksStorageService.getData();
+                    }
+                }
+            })
+            .state('deleteTask', {
+                url: '/deleteTask/:taskId',
+                template: '<delete-task></delete-task>',
                 resolve: {
                     data: function($q, taskPropertiesService, tasksStorageService, usersStorageService) {
                         return $q.all([
@@ -39,66 +78,27 @@
                     }
                 }
             })
-            .when('/createTask', {
-                templateUrl: './feature/tasks/task-actions/task-form.html',
-                controller: 'TaskForm',
-                controllerAs: '$ctrl',
-                resolve: {
-                    users: function(usersStorageService) {
-                        return usersStorageService.getData();
-                    },
-                    tasks: function(tasksStorageService) {
-                        return tasksStorageService.getData();
-                    }
-                }
-            })
-            .when('/editTask/:taskId', {
-                templateUrl: './feature/tasks/task-actions/task-form.html',
-                controller: 'TaskForm',
-                controllerAs: '$ctrl',
-                resolve: {
-                    users: function(usersStorageService) {
-                        return usersStorageService.getData();
-                    },
-                    tasks: function(tasksStorageService) {
-                        return tasksStorageService.getData();
-                    }
-                }
-            })
-            .when('/deleteTask/:taskId', {
-                templateUrl: './feature/tasks/task-actions/delete-task.html',
-                controller: 'DeleteTask',
-                controllerAs: '$ctrl',
-                resolve: {
-                    data: function(tasksStorageService) {
-                        return tasksStorageService.getData();
-                    }
-                }
-            })
-            .when('/createUser', {
-                templateUrl: './feature/users/user-actions/user-form.html',
-                controller: 'UserForm',
-                controllerAs: '$ctrl',
+            .state('createUser', {
+                url: '/createUser',
+                template: '<user-form></user-form>',
                 resolve: {
                     data: function(usersStorageService) {
                         return usersStorageService.getData();
                     }
                 }
             })
-            .when('/editUser/:userId', {
-                templateUrl: './feature/users/user-actions/user-form.html',
-                controller: 'UserForm',
-                controllerAs: '$ctrl',
+            .state('editUser', {
+                url: '/editUser/:userId',
+                template: '<user-form></user-form>',
                 resolve: {
                     data: function(usersStorageService) {
                         return usersStorageService.getData();
                     }
                 }
             })
-            .when('/deleteUser/:userId', {
-                templateUrl: './feature/users/user-actions/delete-user.html',
-                controller: 'DeleteUser',
-                controllerAs: '$ctrl',
+            .state('deleteUser', {
+                url: '/deleteUser/:userId',
+                template: '<delete-user></delete-user>',
                 resolve: {
                     users: function(usersStorageService) {
                         return usersStorageService.getData();
@@ -107,8 +107,7 @@
                         return tasksStorageService.getData();
                     }
                 }
-            })
-            .otherwise('/');
+            });
     }
 
 })();
