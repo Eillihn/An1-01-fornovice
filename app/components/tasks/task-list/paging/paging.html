@@ -1,0 +1,17 @@
+<div>
+    <div>
+        <label>Number of tasks per page:
+            <select ng-model="$ctrl.limit" ng-change="$ctrl.currentPage = 0"
+                    ng-options="n for n in [3, 5, 10, 15, 20]"></select>
+        </label>
+    </div>
+    <div>
+        <button type="button" class="btn" ng-click="$ctrl.currentPage = $ctrl.currentPage - 1"
+                ng-disabled="!$ctrl.currentPage">Prev
+        </button>
+        <button type="button" class="btn" ng-click="$ctrl.currentPage = $ctrl.currentPage + 1"
+                ng-disabled="!$ctrl.limit || !$ctrl.hasNextPage($ctrl.tasks)">
+            Next
+        </button>
+    </div>
+</div>

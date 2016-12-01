@@ -1,0 +1,14 @@
+<div>
+    <h3 class="modal-title">
+        Delete User: <a ui-sref="userTasks({userId: $ctrl.user._id.$oid})">{{$ctrl.user.name}}</a>
+    </h3>
+
+    <button type="button" class="btn btn-danger"
+            ng-click="$ctrl.deleteUser($ctrl.user)" ng-hide="$ctrl.userTasks.length">
+        Delete
+    </button>
+
+    <div class="alert alert-danger" ng-show="$ctrl.userTasks.length">
+        <strong>Oops!</strong> This user cannot be deleted at this time because there are <a ui-sref="userTasks({userId: $ctrl.user._id.$oid})">tasks assigned to them</a>.
+    </div>
+</div>

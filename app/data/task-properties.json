@@ -1,13 +1,8 @@
 [
   {
     "name": "number",
-    "visible": false,
-    "editable": false
-  },
-  {
-    "name": "id",
     "visible": true,
-    "editable": false
+    "editable": true
   },
   {
     "name": "action",

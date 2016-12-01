@@ -1,0 +1,21 @@
+<div>
+    <h3>Delete Task</h3>
+    <div class="row">
+        <div class="col-sm-6">
+            <table class="table table-striped">
+                <tr class="form-group" ng-repeat="prop in $ctrl.properties">
+                    <td>
+                        <label class="control-label text-capitalize">{{prop.name}}</label>
+                    </td>
+                    <td>
+                        {{prop.name === 'deadline' ? ($ctrl.task.deadline | date) :
+                        (prop.name === 'responsible' ? $ctrl.user.name : $ctrl.task[prop.name]) }}
+                    </td>
+                </tr>
+            </table>
+            <button type="button" class="btn btn-danger" ng-click="$ctrl.deleteTask($ctrl.task)">
+                Delete
+            </button>
+        </div>
+    </div>
+</div>

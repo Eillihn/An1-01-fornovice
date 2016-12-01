@@ -8,103 +8,128 @@
 		$stateProvider
             .state('home', {
                 url: '/',
-                template: '<task-list></task-list>',
+                template: `<task-list
+                                users='$resolve.users'
+                                tasks='$resolve.tasks'
+                                on-update='$ctrl.updateTasks(tasks)'>
+                            </task-list>`,
                 resolve: {
-                    data: function($q, taskPropertiesService, tasksStorageService, usersStorageService) {
-                        return $q.all([
-                            taskPropertiesService.getData(),
-                            tasksStorageService.getData(),
-                            usersStorageService.getData()
-                        ]);
+                    tasks: function(tasksSrv) {
+                        return tasksSrv.getTasks();
+                    },
+                    users: function(usersSrv) {
+                        return usersSrv.getUsers();
+                    },
+                    taskProperties: function(taskPropertiesService) {
+                        return taskPropertiesService.getData();
                     }
                 }
-                })
+            })
             .state('users', {
                 url: '/users',
-                template: '<user-list></user-list>',
+                template: `<user-list users='$resolve.users'></user-list>`,
                 resolve: {
-                    data: function(usersStorageService) {
-                        return usersStorageService.getData();
+                    users: function(usersSrv) {
+                        return usersSrv.getUsers();
                     }
                 }
             })
             .state('userTasks', {
                 url: '/userTasks/:userId',
-                template: '<task-list></task-list>',
+                template: `<task-list users='$resolve.users'
+                                tasks='$resolve.tasks'
+                                user='$resolve.user'>
+                            </task-list>`,
                 resolve: {
-                    data: function($q, taskPropertiesService, tasksStorageService, usersStorageService) {
-                        return $q.all([
-                            taskPropertiesService.getData(),
-                            tasksStorageService.getData(),
-                            usersStorageService.getData()
-                        ]);
+                    tasks: function(tasksSrv, $stateParams) {
+                        return tasksSrv.getUserTasks($stateParams['userId']);
+                    },
+                    users: function(usersSrv) {
+                        return usersSrv.getUsers();
+                    },
+                    taskProperties: function(taskPropertiesService) {
+                        return taskPropertiesService.getData();
+                    },
+                    user: function(usersSrv, $stateParams) {
+                        return usersSrv.getUserById($stateParams['userId']);
                     }
                 }
             })
             .state('createTask', {
                 url: '/createTask',
-                template: '<task-form></task-form>',
+                template: `<task-form users='$resolve.users'
+                                on-save="$ctrl.createTask(task)">
+                            </task-form>`,
                 resolve: {
-                    users: function(usersStorageService) {
-                        return usersStorageService.getData();
-                    },
-                    tasks: function(tasksStorageService) {
-                        return tasksStorageService.getData();
+                    users: function(usersSrv) {
+                        return usersSrv.getUsers();
                     }
                 }
             })
             .state('editTask', {
                 url: '/editTask/:taskId',
-                template: '<task-form></task-form>',
+                template: `<task-form
+                                users='$resolve.users'
+                                task='$resolve.task'
+                                on-save="$ctrl.updateTask(task)">
+                            </task-form>`,
                 resolve: {
-                    users: function(usersStorageService) {
-                        return usersStorageService.getData();
+                    users: function(usersSrv) {
+                        return usersSrv.getUsers();
                     },
-                    tasks: function(tasksStorageService) {
-                        return tasksStorageService.getData();
+                    task: function(tasksSrv, $stateParams) {
+                        return tasksSrv.getTaskById($stateParams['taskId']);
                     }
                 }
             })
             .state('deleteTask', {
                 url: '/deleteTask/:taskId',
-                template: '<delete-task></delete-task>',
+                template: `<delete-task task='$resolve.task'
+                                user='$resolve.user'
+                                on-delete="$ctrl.deleteTask($resolve.task)">
+                            </delete-task>`,
                 resolve: {
-                    data: function($q, taskPropertiesService, tasksStorageService, usersStorageService) {
-                        return $q.all([
-                            taskPropertiesService.getData(),
-                            tasksStorageService.getData(),
-                            usersStorageService.getData()
-                        ]);
+                    task: function(tasksSrv, $stateParams) {
+                        return tasksSrv.getTaskById($stateParams['taskId']);
+                    },
+                    user: function(usersSrv, task, $q) {
+                        return usersSrv.getUserById(task.userId)
+                                        .catch(() => { return $q.resolve({}); });
+                    },
+                    taskProperties: function(taskPropertiesService) {
+                        return taskPropertiesService.getData();
                     }
                 }
             })
             .state('createUser', {
                 url: '/createUser',
-                template: '<user-form></user-form>',
-                resolve: {
-                    data: function(usersStorageService) {
-                        return usersStorageService.getData();
-                    }
-                }
+                template: `<user-form on-save='$ctrl.createUser(user)'></user-form>`
             })
             .state('editUser', {
                 url: '/editUser/:userId',
-                template: '<user-form></user-form>',
+                template: `<user-form
+                                user='$resolve.user'
+                                on-save="$ctrl.updateUser(user)">
+                            </user-form>`,
                 resolve: {
-                    data: function(usersStorageService) {
-                        return usersStorageService.getData();
+                    user: function(usersSrv, $stateParams) {
+                        return usersSrv.getUserById($stateParams['userId']);
                     }
                 }
             })
             .state('deleteUser', {
                 url: '/deleteUser/:userId',
-                template: '<delete-user></delete-user>',
+                template: `<delete-user
+                                user='$resolve.user'
+                                user-tasks='$resolve.userTasks'
+                                on-delete="$ctrl.deleteUser($resolve.user)">
+                            </delete-user>`,
                 resolve: {
-                    users: function(usersStorageService) {
-                        return usersStorageService.getData();
+                    user: function(usersSrv, $stateParams) {
+                        return usersSrv.getUserById($stateParams['userId']);
                     },
-                    tasks: function(tasksStorageService) {
-                        return tasksStorageService.getData();
+                    userTasks: function(tasksSrv, $stateParams) {
+                        return tasksSrv.getUserTasks($stateParams['userId']);
                     }
                 }
             });

@@ -1,0 +1,10 @@
+<div class="page-header">
+    <h1>
+        <span ng-hide="{{!$ctrl.user.name}}">{{$ctrl.user.name}}'s </span>To Do List
+        <span class="label label-default"
+              ng-class="$ctrl.incompleteCount() < 3 ? 'label-success' : 'label-warning'"
+              ng-hide="$ctrl.incompleteCount() === 0">
+				{{$ctrl.incompleteCount()}}
+		</span>
+    </h1>
+</div>

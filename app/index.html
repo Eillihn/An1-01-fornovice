@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title page-title></title>
+    <title>Task Manager</title>
     <link href="vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="vendor/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="vendor/jquery-ui/themes/base/jquery-ui.min.css" rel="stylesheet">
@@ -12,25 +12,13 @@
 </head>
 
 <body ng-cloak>
-    <nav class="navbar navbar-default navbar-static-top">
-        <div class="container">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="index.html#/">Task Manager</a>
-            </div>
-            <ul class="nav navbar-nav">
-                <li ui-sref-active="active"><a ui-sref="home">Tasks</a></li>
-                <li ui-sref-active="active"><a ui-sref="users">Users</a></li>
-            </ul>
-        </div>
-    </nav>
 
-    <div class="container">
-        <div ui-view></div>
-    </div>
+    <app></app>
 
     <!--<div ng-controller="Rank as $ctrl"></div>-->
     <!--<div ng-controller="RandomGenerator as $ctrl"></div>-->
     <!--<div ng-controller="FiltersTest as $ctrl"></div>-->
+
 
     <script src="vendor/angular/angular.min.js"></script>
     <script src="vendor/angular-sanitize/angular-sanitize.min.js"></script>
@@ -44,6 +32,7 @@
     <script src="app.config.js"></script>
 
     <script src="/common/common.module.js"></script>
+    <script src="/common/common-constants.js"></script>
     <script src="/common/common.controllers.js"></script>
 
     <script src="/common/directives/common-directives.module.js"></script>
@@ -60,57 +49,43 @@
     <script src="/common/filters/label-case.filter.js"></script>
     <script src="/common/filters/byte-converter.filter.js"></script>
 
-    <script src="/feature/feature.module.js"></script>
-    <script src="/feature/page-title.directive.js"></script>
+    <script src="/components/components.module.js"></script>
 
-    <script src="/feature/tasks/tasks.module.js"></script>
-    <script src="/feature/tasks/tasks-storage.service.js"></script>
-    <script src="/feature/tasks/tasks.service.js"></script>
+    <script src="/components/app/app.component.js"></script>
+    <script src="/components/app/app.controller.js"></script>
+    <script src="/components/app/tasks-mongo-http.service.js"></script>
+    <script src="/components/app/users-mongo-http.service.js"></script>
 
-    <script src="/feature/tasks/task-list/task-list.controller.js"></script>
-    <script src="/feature/tasks/task-list/task-list.component.js"></script>
+    <script src="/components/navigation/navigation.component.js"></script>
+    <script src="/components/tasks/todo-header/todo-header.component.js"></script>
 
-    <script src="/feature/tasks/todo-header/todo-header.component.js"></script>
+    <script src="/components/tasks/task-list/checked-items.filter.js"></script>
+    <script src="/components/tasks/task-list/task-list.component.js"></script>
+    <script src="/components/tasks/task-list/task-list.service.js"></script>
+    <script src="/components/tasks/task-list/task-list.controller.js"></script>
 
-    <script src="/feature/tasks/todo-table/checked-items.filter.js"></script>
-    <script src="/feature/tasks/todo-table/todo-table.component.js"></script>
-    <script src="/feature/tasks/todo-table/todo-table.service.js"></script>
-    <script src="/feature/tasks/todo-table/todo-table.controller.js"></script>
+    <script src="/components/tasks/edit-task/edit-task.component.js"></script>
+    <script src="/components/tasks/edit-task/edit-task.controller.js"></script>
 
-    <script src="/feature/tasks/task-actions/task-form.component.js"></script>
-    <script src="/feature/tasks/task-actions/task-form.service.js"></script>
-    <script src="/feature/tasks/task-actions/task-form.controller.js"></script>
+    <script src="/components/tasks/delete-task/delete-task.controller.js"></script>
+    <script src="/components/tasks/delete-task/delete-task.component.js"></script>
 
-    <script src="/feature/tasks/task-actions/delete-task.controller.js"></script>
-    <script src="/feature/tasks/task-actions/delete-task.service.js"></script>
-    <script src="/feature/tasks/task-actions/delete-task.component.js"></script>
+    <script src="/components/tasks/task-list/paging/paging.component.js"></script>
+    <script src="/components/tasks/task-list/paging/paging.controller.js"></script>
 
-    <script src="/feature/tasks/todo-table/paging/paging.component.js"></script>
-    <script src="/feature/tasks/todo-table/paging/paging.controller.js"></script>
-    <script src="/feature/tasks/todo-table/paging/paging.service.js"></script>
+    <script src="/components/tasks/task-list/search-filter/search-filter.component.js"></script>
+    <script src="/components/tasks/task-list/search-filter/search-filter.controller.js"></script>
+    <script src="/components/tasks/task-list/search-filter/search-filter.service.js"></script>
 
-    <script src="/feature/tasks/todo-table/search-filter/search-filter.component.js"></script>
-    <script src="/feature/tasks/todo-table/search-filter/search-filter.controller.js"></script>
-    <script src="/feature/tasks/todo-table/search-filter/search-filter.service.js"></script>
+    <script src="/components/tasks/task-list/table-config/table-config.component.js"></script>
+    <script src="/components/tasks/task-list/table-config/table-config.controller.js"></script>
+    <script src="/components/tasks/task-list/table-config/task-properties.service.js"></script>
 
-    <script src="/feature/tasks/table-config/table-config.component.js"></script>
-    <script src="/feature/tasks/table-config/table-config.controller.js"></script>
-    <script src="/feature/tasks/table-config/task-properties.service.js"></script>
-
-    <script src="/feature/users/users.module.js"></script>
-    <script src="/feature/users/users.service.js"></script>
-    <script src="/feature/users/users-storage.service.js"></script>
-
-    <script src="/feature/users/user-list/user-list.controller.js"></script>
-    <script src="/feature/users/user-list/user-list.component.js"></script>
-
-    <script src="/feature/users/user-actions/user-form.service.js"></script>
-    <script src="/feature/users/user-actions/user-form.controller.js"></script>
-    <script src="/feature/users/user-actions/user-form.component.js"></script>
-
-    <script src="/feature/users/user-actions/delete-user.controller.js"></script>
-    <script src="/feature/users/user-actions/delete-user.service.js"></script>
-    <script src="/feature/users/user-actions/delete-user.component.js"></script>
+    <script src="/components/users/user-list/user-list.component.js"></script>
+    <script src="/components/users/edit-user/edit-user.controller.js"></script>
+    <script src="/components/users/edit-user/edit-user.component.js"></script>
+    <script src="/components/users/delete-user/delete-user.controller.js"></script>
+    <script src="/components/users/delete-user/delete-user.component.js"></script>
 </body>
 
 </html>

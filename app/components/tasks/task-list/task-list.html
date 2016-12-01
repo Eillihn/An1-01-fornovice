@@ -1,0 +1,68 @@
+<div class="container">
+    <todo-header
+            user="$ctrl.user"
+            tasks="$ctrl.tasks"
+            incomplete-count="$ctrl.incompleteCount($ctrl.tasks)">
+    </todo-header>
+
+    <search-filter></search-filter>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+
+            <table-config></table-config>
+
+        </div>
+        <div class="panel-body">
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th class="text-capitalize" ng-repeat="column in $ctrl.columns | filter: { 'visible': true }">{{column.name}}
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in $ctrl.filterTasks($ctrl.tasks) | limitTo : $ctrl.getLimit() : $ctrl.getSkipCount()">
+                    <td ng-show="$ctrl.isVisibleProperty('number')">{{($index + 1) +
+                        $ctrl.getSkipCount()}}
+                    </td>
+                    <td ng-show="$ctrl.isVisibleProperty('id')">{{item.id}}</td>
+                    <td ng-show="$ctrl.isVisibleProperty('action')">{{item.action}}</td>
+                    <td ng-show="$ctrl.isVisibleProperty('done')">
+                        <label>{{item.done ? 'Yes' : 'No'}}</label>
+                    </td>
+                    <td ng-show="$ctrl.isVisibleProperty('deadline')">{{item.deadline | date}}</td>
+                    <td ng-show="$ctrl.isVisibleProperty('responsible')">
+                        <a ui-sref="userTasks({userId: item.userId})">
+                            {{($ctrl.users | filter: { _id: { $oid : item.userId } }: true)[0].name}}
+                        </a>
+                    </td>
+                    <td ng-show="$ctrl.isVisibleProperty('estimate')">{{item.estimate}}</td>
+                    <td class="text-right" ng-show="$ctrl.isVisibleProperty('commands')">
+                        <button type="button" class="btn btn-primary" ng-click="$ctrl.navigate('editTask', {taskId: item._id.$oid})"
+                                data-toggle="modal" data-target=".edit-item-dialog">
+                            <span class="glyphicon glyphicon-edit" aria-hidden="true" title="Edit"></span>
+                        </button>
+                        <button type="button" class="btn btn-danger" ng-click="$ctrl.navigate('deleteTask', {taskId: item._id.$oid})">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete"></span>
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <paging tasks="$ctrl.tasks"></paging>
+        </div>
+        <div class="panel-footer">
+            <label>
+                <input type="checkbox" ng-model="$ctrl.showComplete" ng-change="$ctrl.toStartPage()"/>
+                Show Complete
+            </label>
+            <button type="button" class="btn btn-danger" ng-show="$ctrl.showRemoveAllCompleted($ctrl.tasks)"
+                    ng-click="$ctrl.updateTasks($ctrl.tasks | filter: {done: false})">
+                Remove all completed tasks
+            </button>
+        </div>
+    </div>
+    <button type="button" class="btn btn-primary" ng-click="$ctrl.navigate('createTask')">Add Item</button>
+</div>

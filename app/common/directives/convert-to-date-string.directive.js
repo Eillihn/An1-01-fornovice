@@ -2,9 +2,9 @@
     'use strict';
 
     angular.module('commonDirectives')
-        .directive('convertToDateString', convertToDate);
+        .directive('convertToDateString', convertToDateString);
 
-    function convertToDate() {
+    function convertToDateString() {
         return {
             restrict: 'A',
             require: 'ngModel',

@@ -2,10 +2,10 @@
     'use strict';
 
     angular.module('app', [
+            'common',
             'ngSanitize',
             'ui.router',
-            'common',
-            'feature'
+            'components'
         ])
         .constant('appName', 'TodoApp')
         .decorator('$log', todoAppLog);

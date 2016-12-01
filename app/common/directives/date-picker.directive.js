@@ -2,9 +2,9 @@
     'use strict';
 
     angular.module('commonDirectives')
-        .directive('datePicker', convertToDate);
+        .directive('datePicker', datePicker);
 
-    function convertToDate() {
+    function datePicker() {
         return {
             restrict: 'A',
             require: 'ngModel',
